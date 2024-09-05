@@ -28,6 +28,7 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8); /* Black with 70% opacity */
   margin: 20px;
+  margin-top: 0px;
   border-radius: 40px;
   color: white;
 }
@@ -75,6 +76,17 @@
     padding: 5px;
     height: calc(100vh - 80px);
   }
+
+  .scoreWrapper{
+    color: black;
+    font-size: 16px;
+    font-weight: bold; 
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  
 }
 
 /* Responsive styles */
@@ -84,6 +96,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .optionsContainer {
@@ -99,6 +113,26 @@
     margin-bottom: 10px;
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  .scoreContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    align-items:center;
+  }
+
+  .scoreWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items:center;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   .button {

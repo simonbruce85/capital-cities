@@ -13,6 +13,8 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [options, setOptions] = useState<Option[]>([]);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+    const [count, setCount] = useState<number>(0);
+
 
     // Function to get random country and options
     const initializeQuiz = () => {
@@ -35,6 +37,13 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const handleOptionClick = (option: Option) => {
         setSelectedOption(option.id);
         setIsCorrect(option.city === currentCountry?.name.common);
+        if (option.city === currentCountry?.name.common) {
+            setCount(count + 1)
+        }
+        setTimeout(() => {
+            // Your code here
+            initializeQuiz();
+        }, 1000);
     };
 
     // Initialize the quiz when the component mounts
@@ -46,6 +55,17 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
 
     return (
         <div className={styles.container}>
+             <div className={styles.scoreContainer}>
+                <div className={styles.scoreWrapper}>
+                    <div style={{ display: "flex"}}>
+                        <p style={{ width: "100%", marginLeft: "5px", marginRight:"5px"}}>Score:</p>
+                        <p >{count}</p>
+                    </div>
+                    <div style={{marginLeft: "5px", marginRight:"5px"}}>
+                        Restart
+                    </div>
+                </div>
+            </div>
             <div className={styles.titleContainer}>
                 <div className={styles.titleWrapper}>
                     <h2 className={styles.title}>{currentCountry.capital}</h2>
@@ -65,7 +85,6 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
                     </div>
                 ))}
             </div>
-            <button className={styles.nextButton} onClick={initializeQuiz}>Next Question</button>
         </div>
     );
 };
