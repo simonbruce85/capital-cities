@@ -36,6 +36,11 @@ const Navbar: React.FC = () => {
               <div className="nav-links">By Capital</div>
             </Link>
           </li>
+          <li onClick={toggleMenu} className="nav-item">
+            <Link to="/byFlags">
+              <div className="nav-links">By Flags</div>
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
