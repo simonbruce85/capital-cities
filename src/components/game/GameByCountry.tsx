@@ -13,6 +13,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [options, setOptions] = useState<Option[]>([]);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+    const [hasSelected, setHasSelected] = useState<boolean>(false);
+
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
 
@@ -33,9 +35,11 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
         setCurrentCountry(randomCountry);
         setSelectedOption(null);
         setIsCorrect(null);
+        setHasSelected(false)
     }, [countries]);
 
     const handleOptionClick = (option: Option) => {
+        setHasSelected(true)
         setSelectedOption(option.id);
         setIsCorrect(option.city === currentCountry?.capital[0]);
         if (option.city === currentCountry?.capital[0]) {
@@ -55,6 +59,24 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
 
     if (!currentCountry) return null;
 
+    const styleSelector = (option: Option) => {
+        if (hasSelected) {
+            if (option.city === currentCountry.capital[0]) {
+                return `${styles.correct}`
+            }
+        }
+
+        if (selectedOption === option.id) {
+            if (isCorrect) {
+                return `${styles.correct}`
+            } else {
+                return `${styles.incorrect}`
+            }
+        } else {
+            return `${styles.blackDefault}`
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.scoreContainer}>
@@ -63,7 +85,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                         <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
                     </div>
-                    <div style={{ marginLeft: "5px", marginRight: "5px" }}>
+                    <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
                     </div>
                 </div>
@@ -77,10 +99,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
-                        disabled={disabled}
-                            className={`${styles.button} ${selectedOption === option.id
-                                ? (isCorrect ? styles.correct : styles.incorrect)
-                                : styles.blackDefault}`}
+                            disabled={disabled}
+                            className={`${styleSelector(option)} ${styles.button}`}
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.city}

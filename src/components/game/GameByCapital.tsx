@@ -15,6 +15,8 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [hasSelected, setHasSelected] = useState<boolean>(false);
+
 
 
     // Function to get random country and options
@@ -33,19 +35,21 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
         setCurrentCountry(correctCountry);
         setSelectedOption(null);
         setIsCorrect(null);
-    },[countries]);
+        setHasSelected(false)
+    }, [countries]);
 
     const handleOptionClick = (option: Option) => {
-            setSelectedOption(option.id);
-            setIsCorrect(option.city === currentCountry?.name.common);
-            if (option.city === currentCountry?.name.common) {
-                setCount(count + 1)
-            }
-            setDisabled(true)
-            setTimeout(() => {
-                initializeQuiz();
-                setDisabled(false)
-            }, 1000);
+        setHasSelected(true)
+        setSelectedOption(option.id);
+        setIsCorrect(option.city === currentCountry?.name.common);
+        if (option.city === currentCountry?.name.common) {
+            setCount(count + 1)
+        }
+        setDisabled(true)
+        setTimeout(() => {
+            initializeQuiz();
+            setDisabled(false)
+        }, 1000);
     };
 
     // Initialize the quiz when the component mounts
@@ -55,6 +59,24 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
 
     if (!currentCountry) return null;
 
+    const styleSelector = (option: Option) => {
+        if (hasSelected) {
+            if (option.city === currentCountry.name.common) {
+                return `${styles.correct}`
+            }
+        }
+
+        if (selectedOption === option.id) {
+            if (isCorrect) {
+                return `${styles.correct}`
+            } else {
+                return `${styles.incorrect}`
+            }
+        } else {
+            return `${styles.blackDefault}`
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.scoreContainer}>
@@ -63,7 +85,7 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
                         <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
                     </div>
-                    <div style={{ marginLeft: "5px", marginRight: "5px" }}>
+                    <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
                     </div>
                 </div>
@@ -77,10 +99,8 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
-                        disabled={disabled}
-                            className={`${styles.button} ${selectedOption === option.id
-                                ? (isCorrect ? styles.correct : styles.incorrect)
-                                : styles.blackDefault}`}
+                            disabled={disabled}
+                            className={`${styleSelector(option)} ${styles.button}`}
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.city}

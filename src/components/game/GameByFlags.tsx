@@ -15,6 +15,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [hasSelected, setHasSelected] = useState<boolean>(false);
+
 
 
     // Function to get random country and options
@@ -33,9 +35,11 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
         setCurrentCountry(randomCountry);
         setSelectedOption(null);
         setIsCorrect(null);
+        setHasSelected(false)
     }, [countries]);
 
     const handleOptionClick = (option: Option) => {
+        setHasSelected(true)
         setSelectedOption(option.id);
         setIsCorrect(option.city === currentCountry?.name.common);
         if (option.city === currentCountry?.name.common) {
@@ -55,32 +59,48 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
 
     if (!currentCountry) return null;
 
+    const styleSelector = (option: Option) => {
+        if (hasSelected) {
+            if (option.city === currentCountry.name.common) {
+                return `${styles.correct}`
+            }
+        }
+
+        if (selectedOption === option.id) {
+            if (isCorrect) {
+                return `${styles.correct}`
+            } else {
+                return `${styles.incorrect}`
+            }
+        } else {
+            return `${styles.blackDefault}`
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.scoreContainer}>
                 <div className={styles.scoreWrapper}>
-                    <div style={{ display: "flex"}}>
-                        <p style={{ width: "100%", marginLeft: "5px", marginRight:"5px"}}>Score:</p>
+                    <div style={{ display: "flex" }}>
+                        <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
                     </div>
-                    <div style={{marginLeft: "5px", marginRight:"5px"}}>
+                    <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
                     </div>
                 </div>
             </div>
             <div className={styles.titleContainer}>
                 <div className={styles.titleWrapper}>
-                    <img style={{height:"120px",width:"200px"}} src={currentCountry.flags.svg}></img>
+                    <img style={{ height: "120px", width: "200px" }} src={currentCountry.flags.svg}></img>
                 </div>
             </div>
             <div className={styles.optionsContainer}>
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
-                        disabled={disabled}
-                            className={`${styles.button} ${selectedOption === option.id
-                                ? (isCorrect ? styles.correct : styles.incorrect)
-                                : styles.blackDefault}`}
+                            disabled={disabled}
+                            className={`${styleSelector(option)} ${styles.button}`}
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.city}
