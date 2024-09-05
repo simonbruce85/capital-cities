@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import './Navbar.css';
+import React, { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import "./Navbar.css";
+import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png"
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,37 +14,27 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="/" className="navbar-logo">
-          MyLogo
-        </a>
+        <Link to="/" >
+          <img src={logo} style={{width:"80px", height:"80px"}}></img>
+        </Link>
         <div className="menu-icon" onClick={toggleMenu}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
-        <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
+        <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
-            <a href="/" className="nav-links">
-              Home
-            </a>
+            <Link to="/">
+              <div onClick={toggleMenu} className="nav-links">Home</div>
+            </Link>
           </li>
-          <li className="nav-item">
-            <a href="/about" className="nav-links">
-              By Capital
-            </a>
+          <li onClick={toggleMenu} className="nav-item">
+            <Link to="/byCountry">
+              <div className="nav-links">By Country</div>
+            </Link>
           </li>
-          <li className="nav-item">
-            <a href="/services" className="nav-links">
-              By Country
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/contact" className="nav-links">
-              By Currency
-            </a>
-          </li>
-          <li className="nav-item">
-            <a href="/contact" className="nav-links">
-              By Flag
-            </a>
+          <li onClick={toggleMenu} className="nav-item">
+            <Link to="/byCountry">
+              <div className="nav-links">By Capital</div>
+            </Link>
           </li>
         </ul>
       </div>
