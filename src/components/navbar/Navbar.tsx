@@ -31,11 +31,11 @@ const Navbar: React.FC = () => {
               <div className="nav-links">By Country</div>
             </Link>
           </li>
-          {/* <li onClick={toggleMenu} className="nav-item">
-            <Link to="/byCountry">
+          <li onClick={toggleMenu} className="nav-item">
+            <Link to="/byCapital">
               <div className="nav-links">By Capital</div>
             </Link>
-          </li> */}
+          </li>
         </ul>
       </div>
     </nav>

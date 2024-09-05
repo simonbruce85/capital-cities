@@ -27,10 +27,7 @@ function App() {
             <GameByCountry countries={countries}
           />} />
           <Route path="/byCapital" element={
-          <GameByCapital
-            country="Germany"
-            correctCapital="Berlin"
-            options={options}
+          <GameByCapital countries={countries}
           />} />
         </Routes>
       </Router>
