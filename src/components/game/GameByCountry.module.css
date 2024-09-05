@@ -57,6 +57,7 @@
 
 .incorrect{
   background-color: lightcoral;
+  color: black;
 }
 
 /* Ensure that the options take full width on small screens */
