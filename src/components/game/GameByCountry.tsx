@@ -56,9 +56,9 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
-                            className={` ${selectedOption === option.id
+                            className={`${styles.button} ${selectedOption === option.id
                                 ? (isCorrect ? styles.correct : styles.incorrect)
-                                : styles.button}`}
+                                : styles.blackDefault}`}
                             onClick={() => handleOptionClick(option)}
                         >
                             {option.city}
