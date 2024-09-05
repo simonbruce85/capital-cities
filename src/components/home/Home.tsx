@@ -8,8 +8,8 @@ const Home: React.FC = () => {
         <div className="container">
             <div className="overlay"></div> {/* Black overlay with opacity */}
             <div className="content">
-                <img src={homeImage} style={{ width: '250px', height: "250px", paddingBottom: "20px" }}></img>
-                <h2 style={{paddingBottom: "100px", color:"white", fontSize:"36px"}}>GeoQuiz!</h2>
+                <img src={homeImage} style={{ width: '250px', height: "250px", paddingBottom: "10px" }}></img>
+                <h2 style={{ color:"white", fontSize:"36px"}}>GeoQuiz!</h2>
                 <Link to="/byCountry">
                     <div className="start-button">Start</div>
                 </Link>
