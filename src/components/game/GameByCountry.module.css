@@ -30,11 +30,13 @@
   background-color: rgba(0, 0, 0, 0.8); /* Black with 70% opacity */
   margin: 20px;
   border-radius: 40px;
+  color: white;
 }
 
 
 .optionsContainer {
   display: flex;
+  height: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 100px;
@@ -54,6 +56,11 @@
 /* Ensure that the options take full width on small screens */
 .optionItem {
   min-width: 30%;
+}
+
+.button{
+  background-color: #333;
+  color: white;
 }
 
 /* Responsive styles */
@@ -87,5 +94,7 @@
 }
 
 .nextButton {
+  background-color: #333;
+  color: white;
   margin-top: 20px;
 }
