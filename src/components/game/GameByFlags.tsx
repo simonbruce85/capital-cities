@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
 
@@ -14,10 +14,11 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [count, setCount] = useState<number>(0);
+    const [disabled, setDisabled] = useState<boolean>(false);
 
 
     // Function to get random country and options
-    const initializeQuiz = () => {
+    const initializeQuiz = useCallback(() => {
         const allCountries = countries.flatMap(country => country.name.common);
         const randomCountry = countries[getRandomInt(0, countries.length - 1)];
 
@@ -32,7 +33,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
         setCurrentCountry(randomCountry);
         setSelectedOption(null);
         setIsCorrect(null);
-    };
+    }, [countries]);
 
     const handleOptionClick = (option: Option) => {
         setSelectedOption(option.id);
@@ -40,16 +41,17 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
         if (option.city === currentCountry?.name.common) {
             setCount(count + 1)
         }
+        setDisabled(true)
         setTimeout(() => {
-            // Your code here
             initializeQuiz();
+            setDisabled(false)
         }, 1000);
     };
 
     // Initialize the quiz when the component mounts
     React.useEffect(() => {
         initializeQuiz();
-    }, []);
+    }, [initializeQuiz]);
 
     if (!currentCountry) return null;
 
@@ -75,6 +77,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
+                        disabled={disabled}
                             className={`${styles.button} ${selectedOption === option.id
                                 ? (isCorrect ? styles.correct : styles.incorrect)
                                 : styles.blackDefault}`}

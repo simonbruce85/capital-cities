@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
 
@@ -14,10 +14,11 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [count, setCount] = useState<number>(0);
+    const [disabled, setDisabled] = useState<boolean>(false);
 
 
     // Function to get random country and options
-    const initializeQuiz = () => {
+    const initializeQuiz = useCallback(() => {
         const allCountries = countries.flatMap(country => country.name.common);
         const correctCountry = countries[getRandomInt(0, countries.length - 1)];
 
@@ -32,36 +33,37 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
         setCurrentCountry(correctCountry);
         setSelectedOption(null);
         setIsCorrect(null);
-    };
+    },[countries]);
 
     const handleOptionClick = (option: Option) => {
-        setSelectedOption(option.id);
-        setIsCorrect(option.city === currentCountry?.name.common);
-        if (option.city === currentCountry?.name.common) {
-            setCount(count + 1)
-        }
-        setTimeout(() => {
-            // Your code here
-            initializeQuiz();
-        }, 1000);
+            setSelectedOption(option.id);
+            setIsCorrect(option.city === currentCountry?.name.common);
+            if (option.city === currentCountry?.name.common) {
+                setCount(count + 1)
+            }
+            setDisabled(true)
+            setTimeout(() => {
+                initializeQuiz();
+                setDisabled(false)
+            }, 1000);
     };
 
     // Initialize the quiz when the component mounts
     React.useEffect(() => {
         initializeQuiz();
-    }, []);
+    }, [initializeQuiz]);
 
     if (!currentCountry) return null;
 
     return (
         <div className={styles.container}>
-             <div className={styles.scoreContainer}>
+            <div className={styles.scoreContainer}>
                 <div className={styles.scoreWrapper}>
-                    <div style={{ display: "flex"}}>
-                        <p style={{ width: "100%", marginLeft: "5px", marginRight:"5px"}}>Score:</p>
+                    <div style={{ display: "flex" }}>
+                        <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
                     </div>
-                    <div style={{marginLeft: "5px", marginRight:"5px"}}>
+                    <div style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
                     </div>
                 </div>
@@ -75,6 +77,7 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
                 {options.map(option => (
                     <div className={styles.optionItem} key={option.id}>
                         <button
+                        disabled={disabled}
                             className={`${styles.button} ${selectedOption === option.id
                                 ? (isCorrect ? styles.correct : styles.incorrect)
                                 : styles.blackDefault}`}
