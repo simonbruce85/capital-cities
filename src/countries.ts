@@ -3904,7 +3904,7 @@ export const countries = [
             }
         },
         "capital": [
-            "Nur-Sultan"
+            "Astana"
         ],
         "languages": {
             "kaz": "Kazakh",
