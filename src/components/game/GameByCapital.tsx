@@ -18,7 +18,6 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const initializeQuiz = () => {
         const allCountries = countries.flatMap(country => country.name.common);
         const correctCountry = countries[getRandomInt(0, countries.length - 1)];
-        const correctCapital = correctCountry.capital[0];
 
         // Get 5 incorrect capitals
         const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common), 5);

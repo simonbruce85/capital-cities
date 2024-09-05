@@ -8,15 +8,6 @@ import { countries } from './countries'; // Import the data
 
 
 function App() {
-
-  const options = [
-    { id: 1, city: 'Berlin' },
-    { id: 2, city: 'Paris' },
-    { id: 3, city: 'Madrid' },
-    { id: 4, city: 'Rome' },
-    { id: 5, city: 'Vienna' },
-    { id: 6, city: 'Brussels' }
-  ];
   return (
     <>
       <Router>
