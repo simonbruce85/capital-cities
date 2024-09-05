@@ -1,9 +1,11 @@
 /* CapitalQuiz.module.css */
 
 .container {
-  display: flex;
   flex-direction: column;
   padding: 5px;
+  flex-grow: 1; /* Take the remaining space after the navbar */
+  display: flex;
+  align-items: center;
 }
 
 .title {
@@ -42,12 +44,12 @@
 .optionsContainer {
   display: flex;
   gap: 7px;
-  height: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 100px;
   width: 100%;
   max-width: 1000px; /* Limit the width for desktop */
+  max-height: 80%;
 }
 
 .correct{
@@ -96,17 +98,17 @@
   .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding-left: 20px;
     padding-right: 20px;
   }
 
   .optionsContainer {
     display: flex;
-    height: 100%;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
+    max-height: 80%;
+
   }
 
   .optionItem {

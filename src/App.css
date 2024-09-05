@@ -1,6 +1,9 @@
 #root {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  background-image: url('/src/assets/background.jpg'); /* or use inline styles for the image */
+  height: 100vh; /* Full viewport height */
+  background-image: url('/src/assets/background.jpg'); /* Background image */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -16,27 +19,4 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
