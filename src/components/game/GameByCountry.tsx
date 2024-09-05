@@ -66,11 +66,6 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                     </div>
                 ))}
             </div>
-            {isCorrect !== null && (
-                <div className={styles.feedback}>
-                    {isCorrect ? <p>Correct!</p> : <div><p>Incorrect</p><p>Try Again!</p></div>}
-                </div>
-            )}
             <button className={styles.nextButton} onClick={initializeQuiz}>Next Question</button>
         </div>
     );
