@@ -58,6 +58,11 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
         initializeQuiz();
     }, [initializeQuiz]);
 
+
+    React.useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to top after rerender
+    }, [currentCountry]);
+
     if (!currentCountry) return null;
 
     const styleSelector = (option: Option) => {

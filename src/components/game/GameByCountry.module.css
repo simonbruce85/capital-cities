@@ -128,9 +128,14 @@
     outline: none;
   }
   
-  .optionItem:focus {
+  .button:focus {
     outline: none;
 }
+
+.button:hover{
+  outline: none;
+}
+
 
   .scoreContainer{
     width: 100%;
