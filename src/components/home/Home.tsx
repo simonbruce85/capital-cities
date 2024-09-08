@@ -8,11 +8,15 @@ const Home: React.FC = () => {
         <div className="container">
             <div className="overlay"></div> {/* Black overlay with opacity */}
             <div className="content">
-                <img src={homeImage} style={{ width: '200px', height: "200px" }}></img>
+                <div style={{display:"flex", height:"40%", justifyContent:"center",alignItems:"center"}}>
+                    <img src={homeImage} style={{ width: '200px', height: "200px" }}></img>
+                </div>
+                <div style={{display:"flex", height:"10%", justifyContent:"center",alignItems:"center"}}>
                 <h2 style={{ color: "white", fontSize: "36px" }}>GeoQuiz</h2>
+                </div>
                 <div className="options-section-container">
                     <div className='sectionContainer'>
-                        <h4 style={{color:"white"}}>Start A Quick Game</h4>
+                        <h4 style={{ color: "white" }}>Start A Quick Game</h4>
                         <div className='optionsContainer' >
                             <Link to="/byCountryQuick" className='option-element'>
                                 <div className="start-button" >Country</div>
@@ -26,7 +30,7 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                     <div className='sectionContainer'>
-                    <h4 style={{color:"white"}}>Explore All Countries</h4>
+                        <h4 style={{ color: "white" }}>Explore All Countries</h4>
                         <div className='optionsContainer'>
                             <Link to="/byCountry" className="option-element">
                                 <div className="start-button">Country</div>
