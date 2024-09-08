@@ -14,11 +14,13 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" >
-          <img src={logo} style={{width:"80px", height:"80px"}}></img>
-        </Link>
-        <div className="menu-icon" onClick={toggleMenu}>
-          {isOpen ? <FaTimes /> : <FaBars />}
+        <div className="logo-container">
+          <Link style={{ width: "50px", height: "50px" }} to="/" >
+            <img src={logo} style={{ width: "50px", height: "50px" }}></img>
+          </Link>
+        </div>
+        <div className="icon-container" onClick={toggleMenu}>
+          {isOpen ? <FaTimes style={{ width: "30px", height: "30px" }} /> : <FaBars style={{ width: "30px", height: "30px" }} />}
         </div>
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
@@ -28,17 +30,17 @@ const Navbar: React.FC = () => {
           </li>
           <li onClick={toggleMenu} className="nav-item">
             <Link to="/byCountry">
-              <div className="nav-links">By Country</div>
+              <div className="nav-links">Country</div>
             </Link>
           </li>
           <li onClick={toggleMenu} className="nav-item">
             <Link to="/byCapital">
-              <div className="nav-links">By Capital</div>
+              <div className="nav-links">Capital</div>
             </Link>
           </li>
           <li onClick={toggleMenu} className="nav-item">
             <Link to="/byFlags">
-              <div className="nav-links">By Flags</div>
+              <div className="nav-links">Flags</div>
             </Link>
           </li>
         </ul>

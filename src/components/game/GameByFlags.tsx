@@ -1,14 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
+import FinalScore from '../finalScore/finalScore';
+import { CapitalQuizProps } from './GameByCapital';
 
-
-
-interface CapitalQuizProps {
-    countries: Country[];
-}
-
-const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
+const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
     const [currentCountry, setCurrentCountry] = useState<Country | null>(null);
     const [options, setOptions] = useState<Option[]>([]);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -17,11 +13,15 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [disabled, setDisabled] = useState<boolean>(false);
     const [hasSelected, setHasSelected] = useState<boolean>(false);
     const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
+    const [isComplete, setIsComplete] = useState<boolean>(false)
     const totalCountries: number = countries.length
 
 
     const initializeQuiz = useCallback(() => {
-        if (remainingCountries.length>0){
+        console.log("starting")
+        console.log(questions)
+        console.log(totalCountries-remainingCountries.length)
+        if (totalCountries-remainingCountries.length<questions ){
             const allCountries = countries.flatMap(country => country.name.common);
             const correctCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
     
@@ -36,9 +36,9 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
             setCurrentCountry(correctCountry);
             setSelectedOption(null);
             setIsCorrect(null);
-        setHasSelected(false)
+            setHasSelected(false)
         }else{
-            console.log("Game Completed")
+            setIsComplete(true)
         }
     }, [countries,remainingCountries]);
 
@@ -83,6 +83,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     }
 
     return (
+        <>
+        {!isComplete?(
         <div className={styles.container}>
             <div className={styles.scoreContainer}>
                 <div className={styles.scoreWrapper}>
@@ -91,7 +93,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                         <p >{count}</p>
                     </div>
                     <div>
-                        {totalCountries - remainingCountries.length+1}/{totalCountries}
+                        {totalCountries - remainingCountries.length+1}/{questions}
                     </div>
                     <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
@@ -116,7 +118,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                     </div>
                 ))}
             </div>
-        </div>
+        </div>):<FinalScore score={count}/>}
+        </>
     );
 };
 

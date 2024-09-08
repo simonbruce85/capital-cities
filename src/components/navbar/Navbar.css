@@ -31,6 +31,16 @@
   .menu-icon {
     display: none;
   }
+
+  .logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon-container{
+    display: none;
+  }
   
   .nav-menu {
     display: flex;
@@ -67,6 +77,13 @@
       font-size: 1.8rem;
       cursor: pointer;
       color: #fff;
+    }
+
+    .icon-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
     }
   
     .nav-menu {

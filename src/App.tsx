@@ -18,12 +18,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/byCountry" element={
             <GameByCountry countries={countries}
+            questions={countries.length}
+          />} />
+           <Route path="/byCountryQuick" element={
+            <GameByCountry countries={countries}
+            questions={20}
           />} />
           <Route path="/byCapital" element={
-          <GameByCapital countries={countries}
+          <GameByCapital countries={countries} questions={countries.length}
+          />} />
+          <Route path="/byCapitalQuick" element={
+          <GameByCapital countries={countries} questions={20}
+          />} />
+          <Route path="/byFlagsQuick" element={
+          <GameByFlags countries={countries} questions={20}
           />} />
           <Route path="/byFlags" element={
-          <GameByFlags countries={countries}
+          <GameByFlags countries={countries} questions={countries.length}
           />} />
         </Routes>
       </Router>
