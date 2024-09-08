@@ -18,27 +18,27 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
 
     const initializeQuiz = useCallback(() => {
-        if (totalCountries-remainingCountries.length<questions ){
+        if (totalCountries - remainingCountries.length < questions) {
             const allCapitals = countries.flatMap(country => country.capital);
             const randomCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
             const correctCapital = randomCountry.capital[0];
-    
+
             // Get 5 incorrect capitals
             const incorrectCapitals = getRandomElements(allCapitals.filter(c => c !== correctCapital), 5);
             const allOptions = [...incorrectCapitals, correctCapital].map((city, index) => ({
                 id: index,
                 city
             }));
-    
+
             setOptions(getRandomElements(allOptions, allOptions.length));
             setCurrentCountry(randomCountry);
             setSelectedOption(null);
             setIsCorrect(null);
-        setHasSelected(false)
-        }else{
+            setHasSelected(false)
+        } else {
             setIsComplete(true)
         }
-    }, [countries,remainingCountries]);
+    }, [countries, remainingCountries]);
 
     const handleOptionClick = (option: Option) => {
         setHasSelected(true)
@@ -80,41 +80,41 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
     return (
         <>
-        {!isComplete?(
-        <div className={styles.container}>
-            <div className={styles.scoreContainer}>
-                <div className={styles.scoreWrapper}>
-                    <div style={{ display: "flex" }}>
-                        <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
-                        <p >{count}</p>
+            {!isComplete ? (
+                <div className={styles.container}>
+                    <div className={styles.scoreContainer}>
+                        <div className={styles.scoreWrapper}>
+                            <div style={{ display: "flex" }}>
+                                <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
+                                <p >{count}</p>
+                            </div>
+                            <div>
+                                {totalCountries - remainingCountries.length + 1}/{questions}
+                            </div>
+                            <div onClick={() => { window.location.reload() }} style={{ marginLeft: "5px", marginRight: "5px" }}>
+                                Restart
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                    {totalCountries - remainingCountries.length+1}/{questions}
+                    <div className={styles.titleContainer}>
+                        <div className={styles.titleWrapper}>
+                            <h2 className={styles.title}>{currentCountry.name.common}</h2>
+                        </div>
                     </div>
-                    <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
-                        Restart
+                    <div className={styles.optionsContainer}>
+                        {options.map(option => (
+                            <div className={styles.optionItem} key={option.id}>
+                                <button
+                                    disabled={disabled}
+                                    className={`${styleSelector(option)} ${styles.button}`}
+                                    onClick={() => handleOptionClick(option)}
+                                >
+                                    {option.city}
+                                </button>
+                            </div>
+                        ))}
                     </div>
-                </div>
-            </div>
-            <div className={styles.titleContainer}>
-                <div className={styles.titleWrapper}>
-                    <h2 className={styles.title}>{currentCountry.name.common}</h2>
-                </div>
-            </div>
-            <div className={styles.optionsContainer}>
-                {options.map(option => (
-                    <div className={styles.optionItem} key={option.id}>
-                        <button
-                            disabled={disabled}
-                            className={`${styleSelector(option)} ${styles.button}`}
-                            onClick={() => handleOptionClick(option)}
-                        >
-                            {option.city}
-                        </button>
-                    </div>
-                ))}
-            </div>
-        </div>):<FinalScore score={count}/>}
+                </div>) : <FinalScore score={count} />}
         </>
     );
 };
