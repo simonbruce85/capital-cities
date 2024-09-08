@@ -14,29 +14,34 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [hasSelected, setHasSelected] = useState<boolean>(false);
-
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
+    const totalCountries: number = countries.length
 
 
     const initializeQuiz = useCallback(() => {
-        const allCapitals = countries.flatMap(country => country.capital);
-        const randomCountry = countries[getRandomInt(0, countries.length - 1)];
-        const correctCapital = randomCountry.capital[0];
-
-        // Get 5 incorrect capitals
-        const incorrectCapitals = getRandomElements(allCapitals.filter(c => c !== correctCapital), 5);
-        const allOptions = [...incorrectCapitals, correctCapital].map((city, index) => ({
-            id: index,
-            city
-        }));
-
-        setOptions(getRandomElements(allOptions, allOptions.length));
-        setCurrentCountry(randomCountry);
-        setSelectedOption(null);
-        setIsCorrect(null);
+        if (remainingCountries.length>0){
+            const allCapitals = countries.flatMap(country => country.capital);
+            const randomCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
+            const correctCapital = randomCountry.capital[0];
+    
+            // Get 5 incorrect capitals
+            const incorrectCapitals = getRandomElements(allCapitals.filter(c => c !== correctCapital), 5);
+            const allOptions = [...incorrectCapitals, correctCapital].map((city, index) => ({
+                id: index,
+                city
+            }));
+    
+            setOptions(getRandomElements(allOptions, allOptions.length));
+            setCurrentCountry(randomCountry);
+            setSelectedOption(null);
+            setIsCorrect(null);
         setHasSelected(false)
-    }, [countries]);
+        }else{
+            console.log("Game Completed")
+        }
+    }, [countries,remainingCountries]);
 
     const handleOptionClick = (option: Option) => {
         setHasSelected(true)
@@ -47,12 +52,11 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
         }
         setDisabled(true)
         setTimeout(() => {
-            initializeQuiz();
             setDisabled(false)
+            setRemainingCountries(prevCountries => prevCountries.filter(item => item.capital[0] !== currentCountry?.capital[0]));
         }, 1000);
     };
 
-    // Initialize the quiz when the component mounts
     React.useEffect(() => {
         initializeQuiz();
     }, [initializeQuiz]);
@@ -84,6 +88,9 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries }) => {
                     <div style={{ display: "flex" }}>
                         <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
+                    </div>
+                    <div>
+                        {totalCountries - remainingCountries.length+1}/{totalCountries}
                     </div>
                     <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart

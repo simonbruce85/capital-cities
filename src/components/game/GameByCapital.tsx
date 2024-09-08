@@ -16,27 +16,30 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
     const [hasSelected, setHasSelected] = useState<boolean>(false);
+    const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
+    const totalCountries: number = countries.length
 
-
-
-    // Function to get random country and options
     const initializeQuiz = useCallback(() => {
-        const allCountries = countries.flatMap(country => country.name.common);
-        const correctCountry = countries[getRandomInt(0, countries.length - 1)];
-
-        // Get 5 incorrect capitals
-        const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common), 5);
-        const allOptions = [...incorrectCountries, correctCountry.name.common].map((countryName, index) => ({
-            id: index,
-            city: countryName
-        }));
-
-        setOptions(getRandomElements(allOptions, allOptions.length));
-        setCurrentCountry(correctCountry);
-        setSelectedOption(null);
-        setIsCorrect(null);
+        if (remainingCountries.length>0){
+            const allCountries = countries.flatMap(country => country.name.common);
+            const correctCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
+    
+            // Get 5 incorrect capitals
+            const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common), 5);
+            const allOptions = [...incorrectCountries, correctCountry.name.common].map((countryName, index) => ({
+                id: index,
+                city: countryName
+            }));
+    
+            setOptions(getRandomElements(allOptions, allOptions.length));
+            setCurrentCountry(correctCountry);
+            setSelectedOption(null);
+            setIsCorrect(null);
         setHasSelected(false)
-    }, [countries]);
+        }else{
+            console.log("Game Completed")
+        }
+    }, [countries,remainingCountries]);
 
     const handleOptionClick = (option: Option) => {
         setHasSelected(true)
@@ -47,8 +50,8 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
         }
         setDisabled(true)
         setTimeout(() => {
-            initializeQuiz();
             setDisabled(false)
+            setRemainingCountries(prevCountries => prevCountries.filter(item => item.name.common !== currentCountry?.name.common));
         }, 1000);
     };
 
@@ -84,6 +87,9 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries }) => {
                     <div style={{ display: "flex" }}>
                         <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
                         <p >{count}</p>
+                    </div>
+                    <div>
+                        {totalCountries - remainingCountries.length+1}/{totalCountries}
                     </div>
                     <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
                         Restart
