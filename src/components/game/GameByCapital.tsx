@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
-import FinalScore from '../finalScore/finalScore';
+import FinalScore from '../finalScore/FinalScore';
 
 export interface CapitalQuizProps {
     countries: Country[];

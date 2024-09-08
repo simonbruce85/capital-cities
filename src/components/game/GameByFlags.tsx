@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
-import FinalScore from '../finalScore/finalScore';
 import { CapitalQuizProps } from './GameByCapital';
+import FinalScore from '../finalScore/FinalScore';
 
 const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
     const [currentCountry, setCurrentCountry] = useState<Country | null>(null);

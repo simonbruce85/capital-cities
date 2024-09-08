@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
-import FinalScore from '../finalScore/finalScore';
+import FinalScore from '../finalScore/FinalScore';
 import { CapitalQuizProps } from './GameByCapital';
 
 const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
