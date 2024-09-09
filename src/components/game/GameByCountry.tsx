@@ -42,7 +42,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
         }
     }, [countries, remainingCountries, language]);
 
-    const handleOptionClick = (option: Option, event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleOptionClick = (option: Option) => {
         setHasSelected(true);
         setSelectedOption(option.id);
         setIsCorrect(option.city === currentCountry?.capital[language]);
@@ -113,7 +113,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
                                 <button
                                     disabled={disabled}
                                     className={`${styleSelector(option)} ${styles.button}`}
-                                    onClick={(e) => handleOptionClick(option,e)}
+                                    onClick={() => handleOptionClick(option)}
                                 >
                                     {option.city}
                                 </button>
