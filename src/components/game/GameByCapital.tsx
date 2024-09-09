@@ -3,6 +3,8 @@ import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
 import FinalScore from '../finalScore/FinalScore';
 import { CapitalQuizProps } from '../../util';
+import { useAtom } from 'jotai';
+import { languageAtom } from '../utils/Atom';
 
 
 const GameByCapital: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
@@ -16,15 +18,17 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
     const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
     const [isComplete, setIsComplete] = useState<boolean>(false)
     const totalCountries: number = countries.length
+    const [language] = useAtom(languageAtom);
+
 
     const initializeQuiz = useCallback(() => {
         if (totalCountries - remainingCountries.length < questions) {
-            const allCountries = countries.flatMap(country => country.name.common[1]);
+            const allCountries = countries.flatMap(country => country.name.common[language]);
             const correctCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
 
             // Get 5 incorrect capitals
-            const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common[1]), 5);
-            const allOptions = [...incorrectCountries, correctCountry.name.common[1]].map((countryName, index) => ({
+            const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common[language]), 5);
+            const allOptions = [...incorrectCountries, correctCountry.name.common[language]].map((countryName, index) => ({
                 id: index,
                 city: countryName
             }));
@@ -37,19 +41,19 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
         } else {
             setIsComplete(true)
         }
-    }, [countries, remainingCountries]);
+    }, [countries, remainingCountries,language]);
 
     const handleOptionClick = (option: Option) => {
         setHasSelected(true)
         setSelectedOption(option.id);
-        setIsCorrect(option.city === currentCountry?.name.common[1]);
-        if (option.city === currentCountry?.name.common[1]) {
+        setIsCorrect(option.city === currentCountry?.name.common[language]);
+        if (option.city === currentCountry?.name.common[language]) {
             setCount(count + 1)
         }
         setDisabled(true)
         setTimeout(() => {
             setDisabled(false)
-            setRemainingCountries(prevCountries => prevCountries.filter(item => item.name.common[1] !== currentCountry?.name.common[1]));
+            setRemainingCountries(prevCountries => prevCountries.filter(item => item.name.common[language] !== currentCountry?.name.common[language]));
         }, 1000);
     };
 
@@ -62,7 +66,7 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
     const styleSelector = (option: Option) => {
         if (hasSelected) {
-            if (option.city === currentCountry.name.common[1]) {
+            if (option.city === currentCountry.name.common[language]) {
                 return `${styles.correct}`
             }
         }
@@ -98,7 +102,7 @@ const GameByCapital: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
                     </div>
                     <div className={styles.titleContainer}>
                         <div className={styles.titleWrapper}>
-                            <h2 className={styles.title}>{currentCountry.capital[1]}</h2>
+                            <h2 className={styles.title}>{currentCountry.capital[language]}</h2>
                         </div>
                     </div>
                     <div className={styles.optionsContainer}>

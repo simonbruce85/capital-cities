@@ -3,9 +3,13 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png"
+import { useAtom } from "jotai";
+import { languageAtom } from "../utils/Atom";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useAtom(languageAtom); // Access the global state
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,6 +17,14 @@ const Navbar: React.FC = () => {
 
   const goToHome = () => {
     setIsOpen(false);
+  };
+
+  const switchLanguages = () => {
+    if (language == 0){
+      setLanguage(1)
+    }else{
+      setLanguage(0)
+    }
   };
 
   return (
@@ -26,7 +38,11 @@ const Navbar: React.FC = () => {
         <div className="icon-container" onClick={toggleMenu}>
           {isOpen ? <FaTimes style={{ width: "30px", height: "30px" }} /> : <FaBars style={{ width: "30px", height: "30px" }} />}
         </div>
+        
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
+        <li onClick={switchLanguages} className="nav-links">
+          {language == 0 ?"EN":"ES"}
+        </li>
           <li className="nav-item">
             <Link to="/">
               <div onClick={toggleMenu} className="nav-links">Home</div>
