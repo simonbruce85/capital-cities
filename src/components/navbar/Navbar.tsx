@@ -11,12 +11,16 @@ const Navbar: React.FC = () => {
     setIsOpen(!isOpen);
   };
 
+  const goToHome = () => {
+    setIsOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo-container">
           <Link style={{ width: "50px", height: "50px" }} to="/" >
-            <img src={logo} style={{ width: "50px", height: "50px" }}></img>
+            <img src={logo} style={{ width: "50px", height: "50px" }} onClick={goToHome}></img>
           </Link>
         </div>
         <div className="icon-container" onClick={toggleMenu}>

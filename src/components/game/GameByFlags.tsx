@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
-import { CapitalQuizProps } from './GameByCapital';
+import { CapitalQuizProps } from '../../util';
 import FinalScore from '../finalScore/FinalScore';
 
 const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
@@ -18,16 +18,13 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
 
     const initializeQuiz = useCallback(() => {
-        console.log("starting")
-        console.log(questions)
-        console.log(totalCountries-remainingCountries.length)
         if (totalCountries-remainingCountries.length<questions ){
-            const allCountries = countries.flatMap(country => country.name.common);
+            const allCountries = countries.flatMap(country => country.name.common[1]);
             const correctCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
     
             // Get 5 incorrect capitals
-            const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common), 5);
-            const allOptions = [...incorrectCountries, correctCountry.name.common].map((countryName, index) => ({
+            const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common[1]), 5);
+            const allOptions = [...incorrectCountries, correctCountry.name.common[1]].map((countryName, index) => ({
                 id: index,
                 city: countryName
             }));
@@ -46,14 +43,14 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
     const handleOptionClick = (option: Option) => {
         setHasSelected(true)
         setSelectedOption(option.id);
-        setIsCorrect(option.city === currentCountry?.name.common);
-        if (option.city === currentCountry?.name.common) {
+        setIsCorrect(option.city === currentCountry?.name.common[1]);
+        if (option.city === currentCountry?.name.common[1]) {
             setCount(count + 1)
         }
         setDisabled(true)
         setTimeout(() => {
             setDisabled(false)
-            setRemainingCountries(prevCountries => prevCountries.filter(item => item.name.common !== currentCountry?.name.common));
+            setRemainingCountries(prevCountries => prevCountries.filter(item => item.name.common[1] !== currentCountry?.name.common[1]));
         }, 1000)
     };
 
@@ -66,7 +63,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
     const styleSelector = (option: Option) => {
         if (hasSelected) {
-            if (option.city === currentCountry.name.common) {
+            if (option.city === currentCountry.name.common[1]) {
                 return `${styles.correct}`
             }
         }
@@ -107,7 +104,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
             </div>
             <div className={styles.optionsContainer}>
                 {options.map(option => (
-                    <div className={styles.optionItem} key={option.id}>
+                    <div className={styles.optionItem} key={`${currentCountry.name.common}-${option.city}`}>
                         <button
                             disabled={disabled}
                             className={`${styleSelector(option)} ${styles.button}`}

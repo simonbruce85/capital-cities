@@ -1,6 +1,6 @@
 export interface Country {
     name: {
-      common: string;
+      common: string[];
     };
     flags:{
       png: string,
@@ -8,7 +8,13 @@ export interface Country {
       alt: string,
     }
     capital: string[];
+    id: number
   }
+
+  export interface CapitalQuizProps {
+    countries: Country[];
+    questions: number
+}
   
   export interface Option {
     id: number;

@@ -3,41 +3,34 @@
 .container {
   flex-direction: column;
   padding: 5px;
-  flex-grow: 1; /* Take the remaining space after the navbar */
+  flex-grow: 1;
+  /* Take the remaining space after the navbar */
   display: flex;
   align-items: center;
 }
 
 .title {
   margin-top: 100px;
-  margin-bottom: 100px;  
+  margin-bottom: 100px;
+  width: 80%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 
-.titleContainer{
+.titleContainer {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.titleWrapper{
-  width: 100%;
-  height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.8); /* Black with 70% opacity */
-  margin: 20px;
-  margin-top: 0px;
-  border-radius: 40px;
-  color: white;
-}
-
-.button{
+.button {
   width: 100%;
   height: 50px;
+}
+
+button:focus {
+  outline: none;
 }
 
 
@@ -48,16 +41,17 @@
   justify-content: space-between;
   margin-bottom: 100px;
   width: 100%;
-  max-width: 1000px; /* Limit the width for desktop */
+  max-width: 1000px;
+  /* Limit the width for desktop */
   max-height: 80%;
 }
 
-.correct{
+.correct {
   background-color: lightgreen;
   color: black;
 }
 
-.incorrect{
+.incorrect {
   background-color: lightcoral;
   color: black;
 }
@@ -67,10 +61,15 @@
   min-width: 30%;
 }
 
-.blackDefault{
+.blackDefault {
   background-color: #333;
   color: white;
 }
+
+.blackDefault:focus {
+  outline: none;
+}
+
 
 @media (min-width: 769px) {
   .container {
@@ -80,26 +79,41 @@
     height: calc(100vh - 80px);
   }
 
-  .scoreWrapper{
+
+  .titleWrapper {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black with 70% opacity */
+    margin: 20px;
+    margin-top: 0px;
+    border-radius: 40px;
+    color: white;
+  }
+
+  .scoreWrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    align-items:center;
+    align-items: center;
     margin-left: 100px;
     margin-right: 100px;
   }
 
-  .scoreContainer{
+  .scoreContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     color: black;
     font-size: 16px;
     font-weight: bold;
-    align-items:center;
+    align-items: center;
   }
-  
+
 }
 
 /* Responsive styles */
@@ -112,12 +126,27 @@
     padding-right: 20px;
   }
 
+  .titleWrapper {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black with 70% opacity */
+    margin: 20px;
+    margin-top: 0px;
+    border-radius: 40px;
+    color: white;
+  }
+
   .optionsContainer {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     margin-bottom: 10px;
     max-height: 80%;
+
   }
 
   .optionItem {
@@ -125,40 +154,35 @@
     margin-bottom: 10px;
     padding-right: 20px;
     padding-left: 20px;
+  }
+
+  .optionItem:focus {
     outline: none;
   }
-  
-  .button:focus {
-    outline: none;
-}
 
-.button:hover{
-  outline: none;
-}
-
-
-  .scoreContainer{
+  .scoreContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     color: black;
     font-size: 16px;
     font-weight: bold;
-    align-items:center;
+    align-items: center;
   }
 
-  .scoreWrapper{
+  .scoreWrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    align-items:center;
+    align-items: center;
     margin-left: 20px;
     margin-right: 20px;
   }
 
   .button {
-    width: 100%; /* Ensure buttons take full width in each item */
+    width: 100%;
+    /* Ensure buttons take full width in each item */
   }
 }
 

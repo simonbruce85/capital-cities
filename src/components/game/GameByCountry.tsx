@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Country, Option, getRandomInt, getRandomElements } from '../../util';
 import styles from './GameByCountry.module.css';
 import FinalScore from '../finalScore/FinalScore';
-import { CapitalQuizProps } from './GameByCapital';
+import { CapitalQuizProps } from '../../util';
 
 const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
     const [currentCountry, setCurrentCountry] = useState<Country | null>(null);
@@ -12,18 +12,16 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
     const [hasSelected, setHasSelected] = useState<boolean>(false);
     const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
-    const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
-    const [isComplete, setIsComplete] = useState<boolean>(false)
-    const totalCountries: number = countries.length
-
+    const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries);
+    const [isComplete, setIsComplete] = useState<boolean>(false);
+    const totalCountries: number = countries.length;
 
     const initializeQuiz = useCallback(() => {
         if (totalCountries - remainingCountries.length < questions) {
-            const allCapitals = countries.flatMap(country => country.capital);
+            const allCapitals = countries.flatMap(country => country.capital[1]);
             const randomCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
-            const correctCapital = randomCountry.capital[0];
+            const correctCapital = randomCountry.capital[1];
 
-            // Get 5 incorrect capitals
             const incorrectCapitals = getRandomElements(allCapitals.filter(c => c !== correctCapital), 5);
             const allOptions = [...incorrectCapitals, correctCapital].map((city, index) => ({
                 id: index,
@@ -34,54 +32,56 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
             setCurrentCountry(randomCountry);
             setSelectedOption(null);
             setIsCorrect(null);
-            setHasSelected(false)
+            setHasSelected(false);
         } else {
-            setIsComplete(true)
+            setIsComplete(true);
         }
-    }, [countries, remainingCountries]);
+    }, [countries, remainingCountries, totalCountries, questions]);
 
-    const handleOptionClick = (option: Option) => {
-        setHasSelected(true)
+    const handleOptionClick = (option: Option, event: React.MouseEvent<HTMLButtonElement>) => {
+        setHasSelected(true);
         setSelectedOption(option.id);
-        setIsCorrect(option.city === currentCountry?.capital[0]);
-        if (option.city === currentCountry?.capital[0]) {
-            setCount(count + 1)
+        setIsCorrect(option.city === currentCountry?.capital[1]);
+
+        if (option.city === currentCountry?.capital[1]) {
+            setCount(count + 1);
         }
-        setDisabled(true)
+
+        event.currentTarget.blur();
+
+
+        setDisabled(true);
         setTimeout(() => {
-            setDisabled(false)
-            setRemainingCountries(prevCountries => prevCountries.filter(item => item.capital[0] !== currentCountry?.capital[0]));
+            setDisabled(false);
+            setRemainingCountries(prevCountries =>
+                prevCountries.filter(item => item.capital[1] !== currentCountry?.capital[1])
+            );
         }, 1000);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         initializeQuiz();
     }, [initializeQuiz]);
-
-
-    React.useEffect(() => {
-        window.scrollTo(0, 0); // Scroll to top after rerender
-    }, [currentCountry]);
 
     if (!currentCountry) return null;
 
     const styleSelector = (option: Option) => {
         if (hasSelected) {
             if (option.city === currentCountry.capital[0]) {
-                return `${styles.correct}`
+                return `${styles.correct}`;
             }
         }
 
         if (selectedOption === option.id) {
             if (isCorrect) {
-                return `${styles.correct}`
+                return `${styles.correct}`;
             } else {
-                return `${styles.incorrect}`
+                return `${styles.incorrect}`;
             }
         } else {
-            return `${styles.blackDefault}`
+            return `${styles.blackDefault}`;
         }
-    }
+    };
 
     return (
         <>
@@ -91,37 +91,40 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
                         <div className={styles.scoreWrapper}>
                             <div style={{ display: "flex" }}>
                                 <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
-                                <p >{count}</p>
+                                <p>{count}</p>
                             </div>
                             <div>
                                 {totalCountries - remainingCountries.length + 1}/{questions}
                             </div>
-                            <div onClick={() => { window.location.reload() }} style={{ marginLeft: "5px", marginRight: "5px" }}>
+                            <div onClick={() => { window.location.reload(); }} style={{ marginLeft: "5px", marginRight: "5px" }}>
                                 Restart
                             </div>
                         </div>
                     </div>
                     <div className={styles.titleContainer}>
                         <div className={styles.titleWrapper}>
-                            <h2 className={styles.title}>{currentCountry.name.common}</h2>
+                            <h2 className={styles.title}>{currentCountry.name.common[1]}</h2>
                         </div>
                     </div>
                     <div className={styles.optionsContainer}>
                         {options.map(option => (
-                            <div className={styles.optionItem} key={option.id}>
+                            <div className={styles.optionItem} key={`${currentCountry.name.common}-${option.city}`}>
                                 <button
                                     disabled={disabled}
                                     className={`${styleSelector(option)} ${styles.button}`}
-                                    onClick={() => handleOptionClick(option)}
+                                    onClick={(e) => handleOptionClick(option,e)}
                                 >
                                     {option.city}
                                 </button>
                             </div>
                         ))}
                     </div>
-                </div>) : <FinalScore score={count} />}
+                </div>
+            ) : (
+                <FinalScore score={count} />
+            )}
         </>
     );
 };
 
-export default GameByCountry
+export default GameByCountry;
