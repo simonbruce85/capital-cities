@@ -2413,7 +2413,7 @@ export const countries = [
         },
         "capital": [
             "Havana",
-            "Havana"
+            "La Habana"
         ],
         "languages": {
             "spa": "Spanish"

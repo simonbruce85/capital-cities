@@ -67,7 +67,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
     const styleSelector = (option: Option) => {
         if (hasSelected) {
-            if (option.city === currentCountry.capital[0]) {
+            if (option.city === currentCountry.capital[1]) {
                 return `${styles.correct}`;
             }
         }
