@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
 
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           <li onClick={switchLanguages} className="nav-item">
-              <div className="nav-links">{language == 0 ? "EN" : "ES"}</div>
+              <div className="nav-links" style={{ display:"flex", justifyContent:"center"}}>{language == 0 ? "EN 🇺🇸" : "ES 🇪🇸"}</div>
           </li>
           <li className="nav-item">
             <Link to="/">
