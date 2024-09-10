@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './ProgressBar.css'; // Optional for styling
 import { useAtom } from 'jotai';
 import { timerDuration } from './Atom';
