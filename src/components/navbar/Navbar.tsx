@@ -20,9 +20,9 @@ const Navbar: React.FC = () => {
   };
 
   const switchLanguages = () => {
-    if (language == 0){
+    if (language == 0) {
       setLanguage(1)
-    }else{
+    } else {
       setLanguage(0)
     }
   };
@@ -38,11 +38,11 @@ const Navbar: React.FC = () => {
         <div className="icon-container" onClick={toggleMenu}>
           {isOpen ? <FaTimes style={{ width: "30px", height: "30px" }} /> : <FaBars style={{ width: "30px", height: "30px" }} />}
         </div>
-        
+
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
-        <li onClick={switchLanguages} className="nav-links">
-          {language == 0 ?"EN":"ES"}
-        </li>
+          <li onClick={switchLanguages} className="nav-item">
+              <div className="nav-links">{language == 0 ? "EN" : "ES"}</div>
+          </li>
           <li className="nav-item">
             <Link to="/">
               <div onClick={toggleMenu} className="nav-links">Home</div>

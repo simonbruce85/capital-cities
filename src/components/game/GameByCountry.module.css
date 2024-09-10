@@ -33,6 +33,9 @@ button:focus {
   outline: none;
 }
 
+.progressBarContainer{
+  margin: 20px;
+}
 
 .optionsContainer {
   display: flex;

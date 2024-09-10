@@ -4,44 +4,47 @@ import styles from './GameByCountry.module.css';
 import { CapitalQuizProps } from '../../util';
 import FinalScore from '../finalScore/FinalScore';
 import { useAtom } from 'jotai';
-import {languageAtom} from "../utils/Atom"
+import { languageAtom, timerDuration } from '../utils/Atom';
+import ProgressBar from '../utils/ProgressBar';
 
 const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
     const [currentCountry, setCurrentCountry] = useState<Country | null>(null);
     const [options, setOptions] = useState<Option[]>([]);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-    const [count, setCount] = useState<number>(0);
     const [disabled, setDisabled] = useState<boolean>(false);
     const [hasSelected, setHasSelected] = useState<boolean>(false);
     const [remainingCountries, setRemainingCountries] = useState<Country[]>(countries)
     const [isComplete, setIsComplete] = useState<boolean>(false)
     const totalCountries: number = countries.length
     const [language] = useAtom(languageAtom);
-
+    const [score, setScore] = useState<number>(0);
+    const [timerDurationState, setTimerDuration] = useAtom(timerDuration);
+    const [scoreCout, setScoreCout] = useState<number>(0);
 
 
     const initializeQuiz = useCallback(() => {
-        if (totalCountries-remainingCountries.length<questions ){
+        if (totalCountries - remainingCountries.length < questions) {
             const allCountries = countries.flatMap(country => country.name.common[language]);
             const correctCountry = remainingCountries[getRandomInt(0, remainingCountries.length - 1)];
-    
+
             // Get 5 incorrect capitals
             const incorrectCountries = getRandomElements(allCountries.filter(c => c !== correctCountry.name.common[language]), 5);
             const allOptions = [...incorrectCountries, correctCountry.name.common[language]].map((countryName, index) => ({
                 id: index,
                 city: countryName
             }));
-    
+
             setOptions(getRandomElements(allOptions, allOptions.length));
             setCurrentCountry(correctCountry);
             setSelectedOption(null);
             setIsCorrect(null);
             setHasSelected(false)
-        }else{
+            setTimerDuration(100)
+        } else {
             setIsComplete(true)
         }
-    }, [countries,remainingCountries,language]);
+    }, [countries, remainingCountries, language]);
 
 
     const handleOptionClick = (option: Option) => {
@@ -49,7 +52,8 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
         setSelectedOption(option.id);
         setIsCorrect(option.city === currentCountry?.name.common[language]);
         if (option.city === currentCountry?.name.common[language]) {
-            setCount(count + 1)
+            setScore(score + (timerDurationState / 100) * 1000)
+            setScoreCout(scoreCout + 1)
         }
         setDisabled(true)
         setTimeout(() => {
@@ -85,41 +89,44 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
 
     return (
         <>
-        {!isComplete?(
-        <div className={styles.container}>
-            <div className={styles.scoreContainer}>
-                <div className={styles.scoreWrapper}>
-                    <div style={{ display: "flex" }}>
-                        <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
-                        <p >{count}</p>
+            {!isComplete ? (
+                <div className={styles.container}>
+                    <div className={styles.scoreContainer}>
+                        <div className={styles.scoreWrapper}>
+                            <div style={{ display: "flex" }}>
+                                <p style={{ width: "100%", marginLeft: "5px", marginRight: "5px" }}>Score:</p>
+                                {(questions != countries.length) ? <p>{score}</p> : <p>{scoreCout}</p>}
+                            </div>
+                            <div>
+                                {totalCountries - remainingCountries.length + 1}/{questions}
+                            </div>
+                            <div onClick={() => { window.location.reload() }} style={{ marginLeft: "5px", marginRight: "5px" }}>
+                                Restart
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        {totalCountries - remainingCountries.length+1}/{questions}
+                    <div className={styles.titleContainer}>
+                        <div className={styles.titleWrapper}>
+                            <img style={{ height: "120px", width: "200px" }} src={currentCountry.flags.svg}></img>
+                        </div>
                     </div>
-                    <div onClick={()=>{window.location.reload()}} style={{ marginLeft: "5px", marginRight: "5px" }}>
-                        Restart
+                    {(questions != countries.length) && <div className={styles.titleContainer}>
+                        <ProgressBar />
+                    </div>}
+                    <div className={styles.optionsContainer}>
+                        {options.map(option => (
+                            <div className={styles.optionItem} key={`${currentCountry.name.common}-${option.city}`}>
+                                <button
+                                    disabled={disabled}
+                                    className={`${styleSelector(option)} ${styles.button}`}
+                                    onClick={() => handleOptionClick(option)}
+                                >
+                                    {option.city}
+                                </button>
+                            </div>
+                        ))}
                     </div>
-                </div>
-            </div>
-            <div className={styles.titleContainer}>
-                <div className={styles.titleWrapper}>
-                    <img style={{ height: "120px", width: "200px" }} src={currentCountry.flags.svg}></img>
-                </div>
-            </div>
-            <div className={styles.optionsContainer}>
-                {options.map(option => (
-                    <div className={styles.optionItem} key={`${currentCountry.name.common}-${option.city}`}>
-                        <button
-                            disabled={disabled}
-                            className={`${styleSelector(option)} ${styles.button}`}
-                            onClick={() => handleOptionClick(option)}
-                        >
-                            {option.city}
-                        </button>
-                    </div>
-                ))}
-            </div>
-        </div>):<FinalScore score={count}/>}
+                </div>) : <FinalScore score={score} />}
         </>
     );
 };
