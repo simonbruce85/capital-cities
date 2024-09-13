@@ -79,7 +79,7 @@ export const countries = [
         "name": {
             "common": [
                 "Sierra Leone",
-                "Sierra Leone"
+                "Sierra Leona"
             ],
             "official": "Republic of Sierra Leone",
             "nativeName": {
@@ -175,7 +175,7 @@ export const countries = [
         },
         "capital": [
             "Yamoussoukro",
-            "Yamoussoukro"
+            "Yamusukro"
         ],
         "languages": {
             "fra": "French"
@@ -259,7 +259,7 @@ export const countries = [
         },
         "capital": [
             "Porto-Novo",
-            "Porto-Novo"
+            "Porto Novo"
         ],
         "languages": {
             "fra": "French"
@@ -481,7 +481,7 @@ export const countries = [
         "name": {
             "common": [
                 "South Africa",
-                "South Africa"
+                "Sudáfrica"
             ],
             "official": "Republic of South Africa",
             "nativeName": {
@@ -587,7 +587,7 @@ export const countries = [
         "name": {
             "common": [
                 "Libya",
-                "Libya"
+                "Libia"
             ],
             "official": "State of Libya",
             "nativeName": {
@@ -783,7 +783,7 @@ export const countries = [
         "name": {
             "common": [
                 "Uzbekistan",
-                "Uzbekistan"
+                "Uzbekistán"
             ],
             "official": "Republic of Uzbekistan",
             "nativeName": {
@@ -799,7 +799,7 @@ export const countries = [
         },
         "capital": [
             "Tashkent",
-            "Tashkent"
+            "Taskent"
         ],
         "languages": {
             "rus": "Russian",
@@ -828,7 +828,7 @@ export const countries = [
         },
         "capital": [
             "Cairo",
-            "Cairo"
+            "El Cairo"
         ],
         "languages": {
             "ara": "Arabic"
@@ -917,7 +917,7 @@ export const countries = [
         },
         "capital": [
             "Dhaka",
-            "Dhaka"
+            "Daca"
         ],
         "languages": {
             "ben": "Bengali"
@@ -1014,7 +1014,7 @@ export const countries = [
         "name": {
             "common": [
                 "Turkey",
-                "Turquia"
+                "Turquía"
             ],
             "official": "Republic of Turkey",
             "nativeName": {
@@ -1042,7 +1042,7 @@ export const countries = [
         "name": {
             "common": [
                 "Afghanistan",
-                "Afghanistan"
+                "Afganistán"
             ],
             "official": "Islamic Republic of Afghanistan",
             "nativeName": {
@@ -1230,7 +1230,7 @@ export const countries = [
         "name": {
             "common": [
                 "Azerbaijan",
-                "Azerbaijan"
+                "Azerbaiyán"
             ],
             "official": "Republic of Azerbaijan",
             "nativeName": {
@@ -1242,7 +1242,7 @@ export const countries = [
         },
         "capital": [
             "Baku",
-            "Baku"
+            "Bakú"
         ],
         "languages": {
             "aze": "Azerbaijani"
