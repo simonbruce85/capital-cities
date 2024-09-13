@@ -1258,7 +1258,7 @@ export const countries = [
         "name": {
             "common": [
                 "Djibouti",
-                "Djibouti"
+                "Yibuti"
             ],
             "official": "Republic of Djibouti",
             "nativeName": {
@@ -1274,7 +1274,7 @@ export const countries = [
         },
         "capital": [
             "Djibouti",
-            "Djibouti"
+            "Yibuti"
         ],
         "languages": {
             "ara": "Arabic",
@@ -1369,7 +1369,7 @@ export const countries = [
         },
         "capital": [
             "Bogota",
-            "Bogota"
+            "Bogotá"
         ],
         "languages": {
             "spa": "Spanish"
@@ -1530,7 +1530,7 @@ export const countries = [
         "name": {
             "common": [
                 "Sudan",
-                "Sudan"
+                "Sudán"
             ],
             "official": "Republic of the Sudan",
             "nativeName": {
@@ -1546,7 +1546,7 @@ export const countries = [
         },
         "capital": [
             "Khartoum",
-            "Jartoum"
+            "Jartum"
         ],
         "languages": {
             "ara": "Arabic",
@@ -1613,7 +1613,7 @@ export const countries = [
         },
         "capital": [
             "Vaduz",
-            "Vaduz"
+            "Vadúz"
         ],
         "languages": {
             "deu": "German"
@@ -1641,7 +1641,7 @@ export const countries = [
         },
         "capital": [
             "Kathmandu",
-            "Katmandu"
+            "Katmandú"
         ],
         "languages": {
             "nep": "Nepali"
@@ -1685,7 +1685,7 @@ export const countries = [
         "name": {
             "common": [
                 "Pakistan",
-                "Pakistan"
+                "Pakistán"
             ],
             "official": "Islamic Republic of Pakistan",
             "nativeName": {
@@ -1746,7 +1746,7 @@ export const countries = [
         "name": {
             "common": [
                 "Botswana",
-                "Botswana"
+                "Botsuana"
             ],
             "official": "Republic of Botswana",
             "nativeName": {
@@ -1779,7 +1779,7 @@ export const countries = [
         "name": {
             "common": [
                 "Lebanon",
-                "Libano"
+                "Líbano"
             ],
             "official": "Lebanese Republic",
             "nativeName": {
@@ -1878,7 +1878,7 @@ export const countries = [
         "name": {
             "common": [
                 "Qatar",
-                "Qatar"
+                "Catar"
             ],
             "official": "State of Qatar",
             "nativeName": {
@@ -1977,7 +1977,7 @@ export const countries = [
         "name": {
             "common": [
                 "Syria",
-                "Syria"
+                "Siria"
             ],
             "official": "Syrian Arab Republic",
             "nativeName": {
@@ -2082,7 +2082,7 @@ export const countries = [
         },
         "capital": [
             "Asuncion",
-            "Asuncion"
+            "Asunción"
         ],
         "languages": {
             "grn": "Guarani",
@@ -2291,7 +2291,7 @@ export const countries = [
         },
         "capital": [
             "Berlin",
-            "Berlin"
+            "Berlín"
         ],
         "languages": {
             "deu": "German"
@@ -2429,7 +2429,7 @@ export const countries = [
         "name": {
             "common": [
                 "Kyrgyzstan",
-                "Kyrgyzstan"
+                "Kirguistán"
             ],
             "official": "Kyrgyz Republic",
             "nativeName": {
@@ -2445,7 +2445,7 @@ export const countries = [
         },
         "capital": [
             "Bishkek",
-            "Bishkek"
+            "Biskek"
         ],
         "languages": {
             "kir": "Kyrgyz",
@@ -2474,7 +2474,7 @@ export const countries = [
         },
         "capital": [
             "Moscow",
-            "Moscu"
+            "Moscú"
         ],
         "languages": {
             "rus": "Russian"
@@ -2584,7 +2584,7 @@ export const countries = [
         "name": {
             "common": [
                 "Canada",
-                "Canada"
+                "Canadá"
             ],
             "official": "Canada",
             "nativeName": {
@@ -2633,7 +2633,7 @@ export const countries = [
         },
         "capital": [
             "Lilongwe",
-            "Lilongue"
+            "Lilongûe"
         ],
         "languages": {
             "eng": "English",
@@ -2650,7 +2650,7 @@ export const countries = [
         "name": {
             "common": [
                 "Saudi Arabia",
-                "Arabia Saudi"
+                "Arabia Saudita"
             ],
             "official": "Kingdom of Saudi Arabia",
             "nativeName": {
@@ -2678,7 +2678,7 @@ export const countries = [
         "name": {
             "common": [
                 "Bosnia and Herzegovina",
-                "Bosnia and Herzegovina"
+                "Bosnia y Herzegovina"
             ],
             "official": "Bosnia and Herzegovina",
             "nativeName": {
@@ -2716,7 +2716,7 @@ export const countries = [
         "name": {
             "common": [
                 "Ethiopia",
-                "Ethiopia"
+                "Etiopía"
             ],
             "official": "Federal Democratic Republic of Ethiopia",
             "nativeName": {
@@ -2728,7 +2728,7 @@ export const countries = [
         },
         "capital": [
             "Addis Ababa",
-            "Addis Ababa"
+            "Adís Abeba"
         ],
         "languages": {
             "amh": "Amharic"
@@ -2803,7 +2803,7 @@ export const countries = [
         "name": {
             "common": [
                 "Oman",
-                "Oman"
+                "Omán"
             ],
             "official": "Sultanate of Oman",
             "nativeName": {
@@ -3169,7 +3169,7 @@ export const countries = [
         "name": {
             "common": [
                 "Haiti",
-                "Haiti"
+                "Haití"
             ],
             "official": "Republic of Haiti",
             "nativeName": {
@@ -3484,7 +3484,7 @@ export const countries = [
         "name": {
             "common": [
                 "Cameroon",
-                "Camerun"
+                "Camerún"
             ],
             "official": "Republic of Cameroon",
             "nativeName": {
@@ -3629,7 +3629,7 @@ export const countries = [
         },
         "capital": [
             "Kinshasa",
-            "Kinshasa"
+            "Kinsasa"
         ],
         "languages": {
             "fra": "French",
@@ -4142,7 +4142,7 @@ export const countries = [
         "name": {
             "common": [
                 "Turkmenistan",
-                "Turkmenistan"
+                "Turkmenistán"
             ],
             "official": "Turkmenistan",
             "nativeName": {
@@ -4158,7 +4158,7 @@ export const countries = [
         },
         "capital": [
             "Ashgabat",
-            "Ashgabat"
+            "Asjabad"
         ],
         "languages": {
             "rus": "Russian",
@@ -4203,7 +4203,7 @@ export const countries = [
         "name": {
             "common": [
                 "Panama",
-                "Panama"
+                "Panamá"
             ],
             "official": "Republic of Panama",
             "nativeName": {
@@ -4215,7 +4215,7 @@ export const countries = [
         },
         "capital": [
             "Panama City",
-            "Ciudad de Panama"
+            "Ciudad de Panamá"
         ],
         "languages": {
             "spa": "Spanish"
@@ -4275,7 +4275,7 @@ export const countries = [
         },
         "capital": [
             "Dublin",
-            "Dublin"
+            "Dublîn"
         ],
         "languages": {
             "eng": "English",
@@ -4375,7 +4375,7 @@ export const countries = [
         },
         "capital": [
             "Ouagadougou",
-            "Ouagadougou"
+            "Uagadugú"
         ],
         "languages": {
             "fra": "French"
@@ -4530,7 +4530,7 @@ export const countries = [
         },
         "capital": [
             "Nouakchott",
-            "Nouakchott"
+            "Nuakchot"
         ],
         "languages": {
             "ara": "Arabic"
@@ -4630,7 +4630,7 @@ export const countries = [
         "name": {
             "common": [
                 "Kazakhstan",
-                "Kazakhstan"
+                "Kazajistán"
             ],
             "official": "Republic of Kazakhstan",
             "nativeName": {
@@ -4646,7 +4646,7 @@ export const countries = [
         },
         "capital": [
             "Astana",
-            "Astana"
+            "Astaná"
         ],
         "languages": {
             "kaz": "Kazakh",
@@ -4780,7 +4780,7 @@ export const countries = [
         "name": {
             "common": [
                 "Japan",
-                "Japon"
+                "Japón"
             ],
             "official": "Japan",
             "nativeName": {
@@ -4863,7 +4863,7 @@ export const countries = [
         },
         "capital": [
             "Santiago",
-            "Santiago"
+            "Santiago de Chile"
         ],
         "languages": {
             "spa": "Spanish"
@@ -5078,7 +5078,7 @@ export const countries = [
         },
         "capital": [
             "Valletta",
-            "Valletta"
+            "La Valeta"
         ],
         "languages": {
             "eng": "English",
@@ -5395,7 +5395,7 @@ export const countries = [
         },
         "capital": [
             "Belmopan",
-            "Belmopan"
+            "Belmopán"
         ],
         "languages": {
             "bjz": "Belizean Creole",
@@ -5425,7 +5425,7 @@ export const countries = [
         },
         "capital": [
             "Naypyidaw",
-            "Naipiyido"
+            "Naipiyidó"
         ],
         "languages": {
             "mya": "Burmese"
@@ -5441,7 +5441,7 @@ export const countries = [
         "name": {
             "common": [
                 "Bhutan",
-                "Butan"
+                "Bután"
             ],
             "official": "Kingdom of Bhutan",
             "nativeName": {
@@ -5614,7 +5614,7 @@ export const countries = [
         "name": {
             "common": [
                 "Comoros",
-                "Comoros"
+                "Comoras"
             ],
             "official": "Union of the Comoros",
             "nativeName": {
@@ -5889,7 +5889,7 @@ export const countries = [
         },
         "capital": [
             "Ulan Bator",
-            "Ulan Bator"
+            "Ulán Bator"
         ],
         "languages": {
             "mon": "Mongolian"
@@ -6025,7 +6025,7 @@ export const countries = [
         },
         "capital": [
             "Jerusalem",
-            "Jerusalem"
+            "Jerusalén"
         ],
         "languages": {
             "ara": "Arabic",
