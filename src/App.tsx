@@ -7,6 +7,7 @@ import GameByCapital from './components/game/GameByCapital';
 import GameByFlags from './components/game/GameByFlags';
 
 import { countries } from './countries'; // Import the data
+import StudyCards from './components/game/StudyCards';
 
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
           />} />
           <Route path="/byFlags" element={
           <GameByFlags countries={countries} questions={countries.length}
+          />} />
+          <Route path="/studyCard" element={
+          <StudyCards countries={countries} questions={countries.length}
           />} />
         </Routes>
       </Router>

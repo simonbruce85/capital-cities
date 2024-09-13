@@ -127,7 +127,7 @@ const GameByCountry: React.FC<CapitalQuizProps> = ({ countries, questions }) => 
                     </div>
                 </div>
             ) : (
-                <FinalScore score={(questions != countries.length) ? score:scoreCout} total={(questions != countries.length) ? (questions*1000):questions} />
+                <FinalScore score={(questions != countries.length) ? score : scoreCout} total={(questions != countries.length) ? (questions*1000):questions} />
             )}
         </>
     );
