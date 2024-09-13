@@ -66,8 +66,8 @@ const StudyCards: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
                             <h2 className={styles.title}>{currentCountry.name.common[language]}</h2>
                         </div>
                     </div>
-                    <div className={styles.onlyOneOptionContainer} style={{display:"flex", flexDirection:"column"}}>
-                            <div className={styles.optionItem} key={`${currentCountry.name.common}-${correctCapitalOption}`} >
+                    <div className={styles.onlyOneOptionContainer}>
+                            <div className={styles.optionItem} key={`${currentCountry.name.common}-${correctCapitalOption}`}>
                                 <button
                                     disabled={disabled}
                                     className={`${styles.button}`}
@@ -78,7 +78,6 @@ const StudyCards: React.FC<CapitalQuizProps> = ({ countries, questions }) => {
                                     </span>
                                 </button>
                             </div>
-                            <div style={{background:"black"}}>Pa que estudies Gabriela Romina</div>
                     </div>
                 </div>
             ) : (
