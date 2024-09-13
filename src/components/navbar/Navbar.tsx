@@ -8,7 +8,7 @@ import { languageAtom } from "../utils/Atom";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [language, setLanguage] = useAtom(languageAtom); // Access the global state
+  const [language, setLanguage] = useAtom(languageAtom);
 
 
   const toggleMenu = () => {
@@ -21,10 +21,13 @@ const Navbar: React.FC = () => {
 
   const switchLanguages = () => {
     if (language == 0) {
+      localStorage.setItem("language","1")
       setLanguage(1)
     } else {
+      localStorage.setItem("language","0")
       setLanguage(0)
     }
+    window.location.reload()
   };
 
   return (
